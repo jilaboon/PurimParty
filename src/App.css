@@ -267,15 +267,16 @@ body, html {
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid #ff00ff;
   border-radius: 15px;
-  padding: 0.35rem 0.6rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   box-shadow: 0 0 20px #ff00ff;
   gap: 0.35rem;
-  flex: 0 0 auto;
+  width: 100%;
+  justify-content: center;
 }
 
 .score-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #ff00ff;
   font-weight: 600;
   display: inline-block;
@@ -283,7 +284,7 @@ body, html {
 }
 
 .score-value {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #ffff00;
   font-weight: 900;
   text-shadow: 0 0 20px #ffff00, 0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000,
@@ -573,8 +574,8 @@ body, html {
   .footer-item {
     flex: 1 1 30%;
     min-width: 110px;
-    width: auto;
-  }
+  width: 100%;
+}
 
   .header {
     margin-top: 3.8rem;
@@ -594,16 +595,16 @@ body, html {
   }
 
   .score-display {
-    padding: 0.25rem 0.45rem;
+    padding: 0.4rem 0.6rem;
     border-radius: 12px;
   }
 
   .score-label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .score-value {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .share-button {
