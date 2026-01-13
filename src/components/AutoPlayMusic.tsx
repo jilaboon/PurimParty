@@ -6,7 +6,6 @@ interface AutoPlayMusicProps {
 }
 
 export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
-  const [hasStarted, setHasStarted] = useState(false);
   const [showHint, setShowHint] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
   const hasAttemptedPlay = useRef(false);
@@ -39,7 +38,6 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
       try {
         audio.currentTime = 0;
         await audio.play();
-        setHasStarted(true);
       } catch (err) {
         console.error('Audio playback failed:', err);
         setShowHint(true);
