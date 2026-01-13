@@ -92,7 +92,7 @@ function App() {
                 onChange={(e) => setPurimMode(e.target.checked)}
                 aria-label="Toggle Purim mode"
               />
-              <span className="toggle-label">Click on me 😈</span>
+              <span className="toggle-label">Click on me</span>
             </label>
           </div>
         </footer>

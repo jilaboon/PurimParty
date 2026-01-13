@@ -90,6 +90,7 @@ body, html {
 .header {
   text-align: center;
   animation: fadeInDown 1s ease;
+  margin-top: 1.2rem;
 }
 
 @keyframes fadeInDown {
@@ -700,14 +701,19 @@ body, html {
   align-items: center;
 }
 
+.music-hint-message {
+  font-size: 0.95rem;
+  color: #ffff00;
+  text-shadow: 0 0 15px #ffff00;
+}
+
 .music-hint-error {
   font-size: 0.95rem;
   color: #ffff00;
   text-shadow: 0 0 15px #ffff00;
 }
 
-.music-hint-button,
-.music-hint-skip {
+.music-hint-button {
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid #00ffff;
   color: #00ffff;
@@ -718,15 +724,7 @@ body, html {
   box-shadow: 0 0 18px #00ffff;
   transition: all 0.2s ease;
 }
-
-.music-hint-skip {
-  border-color: #ff0080;
-  color: #ff0080;
-  box-shadow: 0 0 18px #ff0080;
-}
-
-.music-hint-button:hover,
-.music-hint-skip:hover {
+.music-hint-button:hover {
   transform: scale(1.03);
 }
 

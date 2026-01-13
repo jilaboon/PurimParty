@@ -120,16 +120,7 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
               >
                 Start music
               </button>
-              <button
-                type="button"
-                className="music-hint-skip"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowHint(false);
-                }}
-              >
-                Continue without music
-              </button>
+              <div className="music-hint-message">Pop the bubbles till the party starts</div>
             </motion.div>
           </motion.div>
         )}
