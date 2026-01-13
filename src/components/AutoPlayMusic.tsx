@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface AutoPlayMusicProps {
@@ -58,6 +58,23 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
     };
   }, []); // Empty deps - only run once on mount
 
+  const handleHintPointerDown = useCallback(async () => {
+    const audio = audioRef.current;
+    if (!audio || hasAttemptedPlay.current) return;
+
+    hasAttemptedPlay.current = true;
+    setShowHint(false);
+
+    try {
+      audio.currentTime = 0;
+      await audio.play();
+    } catch (err) {
+      console.error('Audio playback failed:', err);
+      setShowHint(true);
+      hasAttemptedPlay.current = false;
+    }
+  }, []);
+
   // Handle audio errors
   useEffect(() => {
     const audio = audioRef.current;
@@ -102,6 +119,7 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            onPointerDown={handleHintPointerDown}
           >
             <motion.div
               className="music-hint"
