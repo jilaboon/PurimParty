@@ -7,6 +7,7 @@ interface AutoPlayMusicProps {
 
 export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
   const [showHint, setShowHint] = useState(true);
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const hasAttemptedPlay = useRef(false);
 
@@ -34,9 +35,10 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
       await audio.play();
       hasAttemptedPlay.current = true;
       setShowHint(false);
+      setPlaybackError(null);
     } catch (err) {
       console.error('Audio playback failed:', err);
-      setShowHint(true);
+      setPlaybackError('Tap again to start music.');
     }
   }, []);
 
@@ -107,6 +109,27 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
               transition={{ duration: 2, repeat: Infinity }}
             >
               Tap anywhere to start music 🎶
+              {playbackError && <div className="music-hint-error">{playbackError}</div>}
+              <button
+                type="button"
+                className="music-hint-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  startMusic();
+                }}
+              >
+                Start music
+              </button>
+              <button
+                type="button"
+                className="music-hint-skip"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowHint(false);
+                }}
+              >
+                Continue without music
+              </button>
             </motion.div>
           </motion.div>
         )}

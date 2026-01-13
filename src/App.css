@@ -694,6 +694,40 @@ body, html {
   font-weight: 700;
   text-align: center;
   text-shadow: 0 0 20px #00ffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.music-hint-error {
+  font-size: 0.95rem;
+  color: #ffff00;
+  text-shadow: 0 0 15px #ffff00;
+}
+
+.music-hint-button,
+.music-hint-skip {
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 18px #00ffff;
+  transition: all 0.2s ease;
+}
+
+.music-hint-skip {
+  border-color: #ff0080;
+  color: #ff0080;
+  box-shadow: 0 0 18px #ff0080;
+}
+
+.music-hint-button:hover,
+.music-hint-skip:hover {
+  transform: scale(1.03);
 }
 
 /* Accessibility */
