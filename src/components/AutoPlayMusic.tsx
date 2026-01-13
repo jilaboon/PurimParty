@@ -23,56 +23,36 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
     audio.volume = maxVolume;
   }, [purimMode]);
 
-  // Set up one-time event listeners for starting music
-  useEffect(() => {
+  const startMusic = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio || hasAttemptedPlay.current) return;
 
     audio.load();
 
-    const startMusic = async () => {
-      if (hasAttemptedPlay.current) return;
+    try {
+      audio.currentTime = 0;
+      await audio.play();
       hasAttemptedPlay.current = true;
       setShowHint(false);
+    } catch (err) {
+      console.error('Audio playback failed:', err);
+      setShowHint(true);
+    }
+  }, []);
 
-      try {
-        audio.currentTime = 0;
-        await audio.play();
-      } catch (err) {
-        console.error('Audio playback failed:', err);
-        setShowHint(false);
-      }
-    };
-
-    // Listen for ANY user interaction
+  // Set up event listeners for starting music
+  useEffect(() => {
     const events = ['pointerdown', 'touchstart', 'mousedown', 'keydown'];
     events.forEach((event) => {
-      document.addEventListener(event, startMusic, { once: true, passive: true });
+      document.addEventListener(event, startMusic, { passive: true });
     });
 
-    // Cleanup only when component unmounts
     return () => {
       events.forEach((event) => {
         document.removeEventListener(event, startMusic);
       });
     };
-  }, []); // Empty deps - only run once on mount
-
-  const handleHintPointerDown = useCallback(async () => {
-    const audio = audioRef.current;
-    if (!audio || hasAttemptedPlay.current) return;
-
-    hasAttemptedPlay.current = true;
-    setShowHint(false);
-
-    try {
-      audio.currentTime = 0;
-      await audio.play();
-    } catch (err) {
-      console.error('Audio playback failed:', err);
-      setShowHint(false);
-    }
-  }, []);
+  }, [startMusic]);
 
   // Handle audio errors
   useEffect(() => {
@@ -118,8 +98,8 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            onPointerDown={handleHintPointerDown}
-            onClick={handleHintPointerDown}
+            onPointerDown={startMusic}
+            onClick={startMusic}
           >
             <motion.div
               className="music-hint"
