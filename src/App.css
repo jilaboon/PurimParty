@@ -443,6 +443,14 @@ body, html {
   cursor: pointer;
   transition: transform 0.2s;
   will-change: left, top, transform;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bubble-core {
+  border-radius: 50%;
 }
 
 .bubble:hover {

@@ -22,6 +22,7 @@ export const BubblesGame = ({ onPop, purimMode }: BubblesGameProps) => {
   const animationFrameRef = useRef<number | undefined>(undefined);
   const lastFrameRef = useRef<number>(0);
   const poppingIdRef = useRef<number | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
 
   useEffect(() => {
     poppingIdRef.current = poppingId;
@@ -106,16 +107,62 @@ export const BubblesGame = ({ onPop, purimMode }: BubblesGameProps) => {
     return () => clearInterval(interval);
   }, [purimMode]);
 
-  const handleBubblePop = (id: number, e: React.MouseEvent | React.TouchEvent) => {
+  const handleBubblePop = (
+    id: number,
+    e: React.MouseEvent | React.TouchEvent
+  ) => {
     e.stopPropagation();
+    if ('touches' in e) {
+      e.preventDefault();
+    }
+    if (poppingIdRef.current === id) return;
     poppingIdRef.current = id;
     setPoppingId(id);
     onPop();
+    playPopSound();
 
     setTimeout(() => {
       setBubbles((prev) => prev.filter((b) => b.id !== id));
       setPoppingId(null);
     }, 200);
+  };
+
+  const playPopSound = () => {
+    try {
+      if (!audioContextRef.current) {
+        audioContextRef.current = new AudioContext();
+      }
+
+      const audioContext = audioContextRef.current;
+      if (audioContext.state === 'suspended') {
+        audioContext.resume().catch(() => undefined);
+      }
+
+      const now = audioContext.currentTime;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(380, now);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.08);
+
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.25, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.15);
+
+      osc.onended = () => {
+        osc.disconnect();
+        gain.disconnect();
+      };
+    } catch {
+      // Ignore audio errors (e.g., autoplay restrictions).
+    }
   };
 
   return (
@@ -128,11 +175,8 @@ export const BubblesGame = ({ onPop, purimMode }: BubblesGameProps) => {
             style={{
               left: `${bubble.x}%`,
               top: `${bubble.y}%`,
-              width: bubble.size,
-              height: bubble.size,
-              background: `radial-gradient(circle at 30% 30%, ${bubble.color}aa, ${bubble.color}33)`,
-              border: `2px solid ${bubble.color}`,
-              boxShadow: `0 0 20px ${bubble.color}`,
+              width: bubble.size + 14,
+              height: bubble.size + 14,
               position: 'absolute',
             }}
             animate={
@@ -145,9 +189,20 @@ export const BubblesGame = ({ onPop, purimMode }: BubblesGameProps) => {
                 : undefined
             }
             exit={{ opacity: 0, scale: 0 }}
-            onClick={(e) => handleBubblePop(bubble.id, e)}
+            onMouseDown={(e) => handleBubblePop(bubble.id, e)}
             onTouchStart={(e) => handleBubblePop(bubble.id, e)}
-          />
+          >
+            <div
+              className="bubble-core"
+              style={{
+                width: bubble.size,
+                height: bubble.size,
+                background: `radial-gradient(circle at 30% 30%, ${bubble.color}aa, ${bubble.color}33)`,
+                border: `2px solid ${bubble.color}`,
+                boxShadow: `0 0 20px ${bubble.color}`,
+              }}
+            />
+          </motion.div>
         ))}
       </AnimatePresence>
     </div>
