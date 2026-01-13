@@ -273,6 +273,7 @@ body, html {
   gap: 0.35rem;
   width: 100%;
   justify-content: center;
+  min-height: 44px;
 }
 
 .score-label {
@@ -383,8 +384,9 @@ body, html {
   transition: all 0.3s;
   box-shadow: 0 0 15px #ffff00;
   font-size: 1rem;
-  width: auto;
+  width: 100%;
   text-shadow: 0 1px 0 #000, 0 -1px 0 #000, 1px 0 0 #000, -1px 0 0 #000;
+  min-height: 44px;
 }
 
 .share-item,
