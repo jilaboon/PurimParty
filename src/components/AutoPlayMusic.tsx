@@ -29,31 +29,25 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
     const audio = audioRef.current;
     if (!audio || hasAttemptedPlay.current) return;
 
+    audio.load();
+
     const startMusic = async () => {
       if (hasAttemptedPlay.current) return;
       hasAttemptedPlay.current = true;
+      setShowHint(false);
 
       try {
-        console.log('Attempting to play music...');
+        audio.currentTime = 0;
         await audio.play();
-        console.log('Music started successfully!');
         setHasStarted(true);
-        setShowHint(false);
       } catch (err) {
         console.error('Audio playback failed:', err);
-        // Show error in hint
-        setShowHint(false);
-        // Try again after a short delay
-        setTimeout(() => {
-          if (audio && !hasStarted) {
-            audio.play().catch((e) => console.error('Retry failed:', e));
-          }
-        }, 500);
+        setShowHint(true);
       }
     };
 
     // Listen for ANY user interaction
-    const events = ['click', 'touchstart', 'mousedown', 'keydown'];
+    const events = ['pointerdown', 'touchstart', 'mousedown', 'keydown'];
     events.forEach((event) => {
       document.addEventListener(event, startMusic, { once: true, passive: true });
     });
