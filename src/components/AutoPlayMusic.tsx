@@ -91,17 +91,26 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
       audio.pause();
     };
 
+    const handleFocus = () => {
+      if (document.hidden || !hasAttemptedPlay.current) return;
+      audio.play().catch(() => undefined);
+    };
+
     const handleVisibility = () => {
       if (document.hidden) {
         audio.pause();
+      } else if (hasAttemptedPlay.current) {
+        audio.play().catch(() => undefined);
       }
     };
 
     window.addEventListener('blur', handleBlur);
+    window.addEventListener('focus', handleFocus);
     document.addEventListener('visibilitychange', handleVisibility);
 
     return () => {
       window.removeEventListener('blur', handleBlur);
+      window.removeEventListener('focus', handleFocus);
       document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
