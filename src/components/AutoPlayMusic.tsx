@@ -40,7 +40,7 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
         await audio.play();
       } catch (err) {
         console.error('Audio playback failed:', err);
-        setShowHint(true);
+        setShowHint(false);
       }
     };
 
@@ -70,8 +70,7 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
       await audio.play();
     } catch (err) {
       console.error('Audio playback failed:', err);
-      setShowHint(true);
-      hasAttemptedPlay.current = false;
+      setShowHint(false);
     }
   }, []);
 
@@ -120,6 +119,7 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             onPointerDown={handleHintPointerDown}
+            onClick={handleHintPointerDown}
           >
             <motion.div
               className="music-hint"
