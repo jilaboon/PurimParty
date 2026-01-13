@@ -96,7 +96,7 @@ export const BubblesGame = ({ onPop, purimMode }: BubblesGameProps) => {
         ],
       };
 
-      setBubbles((prev) => [...prev, newBubble]);
+      setBubbles((prev) => (prev.length >= 15 ? prev : [...prev, newBubble]));
 
       // Remove after 30 seconds
       setTimeout(() => {

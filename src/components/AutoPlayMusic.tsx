@@ -83,6 +83,29 @@ export const AutoPlayMusic = ({ purimMode }: AutoPlayMusicProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleBlur = () => {
+      audio.pause();
+    };
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        audio.pause();
+      }
+    };
+
+    window.addEventListener('blur', handleBlur);
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      window.removeEventListener('blur', handleBlur);
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
+
   return (
     <>
       <audio
