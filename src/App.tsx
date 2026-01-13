@@ -46,6 +46,14 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPurimMode((prev) => !prev);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="app">
       <NeonBackground intensity={intensity} purimMode={purimMode} />
@@ -84,16 +92,15 @@ function App() {
             <ShareButton />
           </div>
 
-          <div className="footer-item controls-row">
-            <label className="purim-toggle">
-              <input
-                type="checkbox"
-                checked={purimMode}
-                onChange={(e) => setPurimMode(e.target.checked)}
-                aria-label="Toggle Purim mode"
-              />
-              <span className="toggle-label">Click on me</span>
-            </label>
+          <div className="footer-item buy-item">
+            <a
+              className="buy-button"
+              href="https://links.payboxapp.com/NROdj55gSZb"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Buy Tickets
+            </a>
           </div>
         </footer>
       </div>

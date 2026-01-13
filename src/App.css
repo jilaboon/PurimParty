@@ -391,6 +391,38 @@ body, html {
   width: 100%;
 }
 
+.buy-item {
+  width: 100%;
+}
+
+.buy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.9rem 1.6rem;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff200, #ff6ad5);
+  color: #000;
+  border: 3px solid #fff200;
+  box-shadow: 0 0 25px rgba(255, 242, 0, 0.8), 0 0 45px rgba(255, 106, 213, 0.7);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buy-button:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 35px rgba(255, 242, 0, 0.9), 0 0 60px rgba(255, 106, 213, 0.8);
+}
+
+.buy-button:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
 .share-button:hover {
   background: rgba(255, 255, 0, 0.2);
   box-shadow: 0 0 30px #ffff00;
@@ -577,6 +609,11 @@ body, html {
   .share-button {
     padding: 0.4rem 0.6rem;
     font-size: 0.9rem;
+  }
+
+  .buy-button {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
   }
 
   .purim-toggle {
