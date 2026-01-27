@@ -10,7 +10,7 @@ import { useCountdown } from './hooks/useCountdown';
 import './App.css';
 
 function App() {
-  const targetDate = '2026-03-02T21:00:00';
+  const targetDate = '2026-03-05T21:30:00';
   const { totalSeconds, days, hours, minutes, seconds, isPartyTime } =
     useCountdown(targetDate);
 
@@ -75,7 +75,7 @@ function App() {
             <br />
             <span className="date-big">{headerCountdown}</span>
           </h1>
-          <p className="subtitle">March 2, 2026 — 21:00</p>
+          <p className="subtitle"><span className="day-name">THURSDAY</span> March 5, 2026 — 21:30</p>
         </header>
 
         <main className="main-content">
@@ -93,14 +93,15 @@ function App() {
           </div>
 
           <div className="footer-item buy-item">
-            <a
-              className="buy-button"
-              href="https://links.payboxapp.com/NROdj55gSZb"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Buy Tickets
-            </a>
+            <span className="buy-button buy-button-disabled">
+              Buy Tickets <span className="soon-label">SOON</span>
+            </span>
+          </div>
+
+          <div className="footer-item contact-info">
+            <div>לפרטים:</div>
+            <div>עינת 0524017733</div>
+            <div>גיל 0522588867</div>
           </div>
         </footer>
       </div>
