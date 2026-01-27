@@ -827,11 +827,17 @@ input:focus-visible {
 }
 
 .location {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
   color: #ff00ff;
   margin-top: 0.5rem;
-  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-  font-weight: 600;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
+  font-weight: 700;
   direction: rtl;
 }
 
