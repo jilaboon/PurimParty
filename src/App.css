@@ -594,12 +594,16 @@ body, html {
   html,
   #root,
   .app {
-    height: 100svh;
+    min-height: 100svh;
+    height: auto;
+    overflow-y: auto;
   }
 
   .content-wrapper {
     padding: 0.75rem;
-    height: 100svh;
+    padding-bottom: 2rem;
+    min-height: 100svh;
+    height: auto;
   }
 
   .footer {
