@@ -826,6 +826,15 @@ input:focus-visible {
   font-size: 1.2em;
 }
 
+.location {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: #ff00ff;
+  margin-top: 0.5rem;
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+  font-weight: 600;
+  direction: rtl;
+}
+
 .contact-info {
   width: 100%;
   text-align: center;
