@@ -8,7 +8,7 @@ export const ShareButton = () => {
   const handleShare = async () => {
     const shareData = {
       title: 'Purim Party 2026',
-      text: 'PURIM PARTY 2.3.26 🎭🪩 March 2, 21:00 (Israel time) — join me!',
+      text: 'PURIM PARTY 5.3.26 🎭🪩 Thursday March 5, 21:30 (Israel time) — join me!',
       url: window.location.href,
     }; 
 
