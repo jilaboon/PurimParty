@@ -76,7 +76,7 @@ function App() {
             <span className="date-big">{headerCountdown}</span>
           </h1>
           <p className="subtitle"><span className="day-name">THURSDAY</span> March 5, 2026 — 21:30</p>
-          <p className="location">שמעיה אימבר גדיש 9, קרית אונו</p>
+          <p className="location">שמירה אימבר גדיש 9, קרית אונו</p>
         </header>
 
         <main className="main-content">
