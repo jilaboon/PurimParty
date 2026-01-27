@@ -94,9 +94,14 @@ function App() {
           </div>
 
           <div className="footer-item buy-item">
-            <span className="buy-button buy-button-disabled">
-              Buy Tickets <span className="soon-label">SOON</span>
-            </span>
+            <a
+              className="buy-button"
+              href="https://pay.grow.link/9adc34a9dd8562974bcfa8a8037cf97e-MzAxNzQ4OA"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Buy Tickets
+            </a>
           </div>
 
           <div className="footer-item contact-info">
